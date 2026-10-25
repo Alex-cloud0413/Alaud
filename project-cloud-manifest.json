@@ -25,30 +25,38 @@
       "必要开发交付材料"
     ],
     "deviceOnly": [
-      "真实会议原音",
-      "真实转写与备注",
-      "真实跟进事项"
+      "真实会议暂存原音",
+      "待同步编辑",
+      "录音索引与离线模型"
     ],
     "rebuildableLocal": [
       ".build",
       "DerivedData",
       "artifacts",
       "签名安装包"
+    ],
+    "userICloud": [
+      "真实会议原音",
+      "转写、备注与跟进事项",
+      "不可变会议元数据历史"
     ]
   },
   "lastVerified": {
-    "githubCommit": "b941176d0c8f89ffd3fe2665421e0759420c6b06",
-    "verifiedAt": "2026-10-25T19:54:39+08:00",
-    "freshPullFileCount": 61,
-    "freshPullByteCount": 294767,
+    "githubCommit": "584cdf21b27522ff1ecccb18a1f657dcb4f6b278",
+    "verifiedAt": "2026-10-25T22:42:39+08:00",
+    "freshPullFileCount": 92,
+    "freshPullByteCount": 508815,
     "method": "fresh_pull_and_sha256_all_tracked_files",
     "result": "passed",
     "driveSnapshot": {
-      "verifiedAt": "2026-10-25T16:05:45+08:00",
-      "fileCount": 5,
-      "byteCount": 1650937,
-      "changedInThisUpdate": false
+      "changedInThisUpdate": true,
+      "newSyntheticFiles": 2,
+      "newByteCount": 373063,
+      "downloadHashVerified": true,
+      "failed": 0,
+      "receipt": "docs/ui-cloud-verification.json",
+      "previousFileCount": 5
     }
   },
-  "developmentVersion": "0.1.1 (2)"
+  "developmentVersion": "0.2.0 (3)"
 }
