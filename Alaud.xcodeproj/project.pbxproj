@@ -17,6 +17,7 @@
 		65F745B855A80C0C303736FC /* AlaudCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1CE56B16E35B69154F20CACE /* AlaudCore */; };
 		69470A4E4480C305C28EAF76 /* DemoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EF608CC1D0023E1723C8FE /* DemoData.swift */; };
 		6A29613BC40E37FFB928CEA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C9C87239E09A2EAC3F37942 /* Assets.xcassets */; };
+		7510AF41816CF71FC9F4632F /* PlaybackInteractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F32AAA7D968EE8BA02C6E /* PlaybackInteractionTests.swift */; };
 		82305489C0809D6FB1099B75 /* SegmentWriterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6958EE263D1A096ACCFB41D1 /* SegmentWriterTests.swift */; };
 		8862270E3E970FBE63F59B0F /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3E620751404C5DBF8549E6 /* AppModel.swift */; };
 		93FB6FB10039581B8985B4BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61BC94A3ADD7B44E31821248 /* Assets.xcassets */; };
@@ -49,6 +50,13 @@
 			remoteGlobalIDString = 957C046FBCB9F34A8B7E5302;
 			remoteInfo = AlaudWatch;
 		};
+		D189984822D4601D3866E216 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 60D88AE278F996EE0C8DD50B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1070E4E376D8A9E2E70159A0;
+			remoteInfo = Alaud;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -66,6 +74,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		073F32AAA7D968EE8BA02C6E /* PlaybackInteractionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackInteractionTests.swift; sourceTree = "<group>"; };
 		17A2106F365BE0E8C2700EDD /* MeetingDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailView.swift; sourceTree = "<group>"; };
 		31014368DA9323AC419009B3 /* RecordingIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingIntents.swift; sourceTree = "<group>"; };
 		3C9C87239E09A2EAC3F37942 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -85,6 +94,7 @@
 		C174CECAE5F98E7F2224C73E /* AlaudWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlaudWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5DAADC5E3EC6F39D69CD150 /* RecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingView.swift; sourceTree = "<group>"; };
 		E595B914B1F9008465F437B8 /* 产品｜Apple Watch - Plaud */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "产品｜Apple Watch - Plaud"; path = .; sourceTree = SOURCE_ROOT; };
+		EF1A25B83501D0DDF8B165E0 /* AlaudUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = AlaudUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0B0E8433F7B0B901CDFF376 /* WatchTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchTransfer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -157,10 +167,19 @@
 			path = Phone;
 			sourceTree = "<group>";
 		};
+		657C2C6985BBEC297C9C60E3 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				073F32AAA7D968EE8BA02C6E /* PlaybackInteractionTests.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		CA0675E0F577C131699E80B8 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				2D1BE5D19C0AD71459366CF8 /* App */,
+				657C2C6985BBEC297C9C60E3 /* UI */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -201,6 +220,7 @@
 			children = (
 				A6860523AF21ACBD91AB5CDD /* Alaud.app */,
 				969174989F122F9719BFCC38 /* AlaudTests.xctest */,
+				EF1A25B83501D0DDF8B165E0 /* AlaudUITests.xctest */,
 				C174CECAE5F98E7F2224C73E /* AlaudWatch.app */,
 			);
 			name = Products;
@@ -271,6 +291,24 @@
 			productReference = C174CECAE5F98E7F2224C73E /* AlaudWatch.app */;
 			productType = "com.apple.product-type.application";
 		};
+		EBFAE8DD68EBF4598FA93EC7 /* AlaudUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 52185CE8C39B66748051707E /* Build configuration list for PBXNativeTarget "AlaudUITests" */;
+			buildPhases = (
+				CD9EE3FB8F79A87655D35570 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				24891BADE2A042D7B4252280 /* PBXTargetDependency */,
+			);
+			name = AlaudUITests;
+			packageProductDependencies = (
+			);
+			productName = AlaudUITests;
+			productReference = EF1A25B83501D0DDF8B165E0 /* AlaudUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -291,6 +329,11 @@
 					957C046FBCB9F34A8B7E5302 = {
 						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
+					};
+					EBFAE8DD68EBF4598FA93EC7 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+						TestTargetID = 1070E4E376D8A9E2E70159A0;
 					};
 				};
 			};
@@ -314,6 +357,7 @@
 				1070E4E376D8A9E2E70159A0 /* Alaud */,
 				957C046FBCB9F34A8B7E5302 /* AlaudWatch */,
 				88AAFBD3122DACB239D355F5 /* AlaudTests */,
+				EBFAE8DD68EBF4598FA93EC7 /* AlaudUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -378,9 +422,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CD9EE3FB8F79A87655D35570 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7510AF41816CF71FC9F4632F /* PlaybackInteractionTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		24891BADE2A042D7B4252280 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1070E4E376D8A9E2E70159A0 /* Alaud */;
+			targetProxy = D189984822D4601D3866E216 /* PBXContainerItemProxy */;
+		};
 		2AC21C09CC1F03EAB433C1F6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 957C046FBCB9F34A8B7E5302 /* AlaudWatch */;
@@ -476,7 +533,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_LANGUAGE = "zh-Hans";
 				DEVELOPMENT_TEAM = "";
@@ -499,7 +556,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.1.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -509,6 +566,23 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Debug;
+		};
+		72C1DF96B5798BA033CA22F9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.gaoyiming.alaud.uitests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Alaud;
 			};
 			name = Debug;
 		};
@@ -543,6 +617,23 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Alaud.app/Alaud";
+			};
+			name = Release;
+		};
+		BE0EA3AE5D8B139171BA3603 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.gaoyiming.alaud.uitests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Alaud;
 			};
 			name = Release;
 		};
@@ -582,7 +673,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_LANGUAGE = "zh-Hans";
 				DEVELOPMENT_TEAM = "";
@@ -599,7 +690,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.1.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -631,6 +722,15 @@
 			buildConfigurations = (
 				4A83E5AF19B6C5D56E783A62 /* Debug */,
 				EBFF2C99E228C91A07B9B929 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		52185CE8C39B66748051707E /* Build configuration list for PBXNativeTarget "AlaudUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				72C1DF96B5798BA033CA22F9 /* Debug */,
+				BE0EA3AE5D8B139171BA3603 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

@@ -19,7 +19,7 @@ struct WatchRecordingView: View {
     @Environment(\.scenePhase) private var scenePhase
     init(model: AppModel) { self.model = model; recorder = model.recorder }
 
-    private var waiting: Int { model.meetings.filter { $0.endedAt != nil && !$0.transferComplete }.count }
+    private var waiting: Int { model.meetings.filter { $0.source == .watch && $0.endedAt != nil }.count }
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -50,6 +50,8 @@ struct WatchRecordingView: View {
                         Text(waiting > 0 ? "\(waiting) 场录音等待手机确认" : "抬腕记录，手机跟进")
                             .font(.caption2).foregroundStyle(.secondary).multilineTextAlignment(.center)
                         if waiting > 0 { Button("重试同步") { model.transfer.pump(); model.refresh() }.font(.caption) }
+                        Text("手机完整保存后\n自动清理手表副本")
+                            .font(.caption2).foregroundStyle(.secondary).multilineTextAlignment(.center)
                     }
                     if let error = model.errorMessage ?? recorder.errorMessage {
                         Text(error).font(.caption2).foregroundStyle(.orange)

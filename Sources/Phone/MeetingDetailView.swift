@@ -139,10 +139,17 @@ struct MeetingDetailView: View {
                                 } label: {
                                     Label("\(audioClock(part.offset)) · \(audioClock(part.duration))", systemImage: playback.currentPart == part.index ? "stop.circle.fill" : "play.circle")
                                         .monospacedDigit()
+                                        .frame(minHeight: 44).contentShape(Rectangle())
                                 }
+                                .buttonStyle(.borderless)
+                                .accessibilityLabel(playback.currentPart == part.index ? "停止片段 \(part.index + 1)" : "播放片段 \(part.index + 1)")
+                                .accessibilityIdentifier("audio-play-\(part.index)")
                                 Spacer()
                                 if let url = try? model.store.audioURL(meetingID: id, part: part) {
-                                    ShareLink(item: url) { Image(systemName: "square.and.arrow.up").frame(minWidth: 44, minHeight: 44) }.accessibilityLabel("导出原音片段 \(part.index + 1)")
+                                    ShareLink(item: url) { Image(systemName: "square.and.arrow.up").frame(minWidth: 44, minHeight: 44).contentShape(Rectangle()) }
+                                        .buttonStyle(.borderless)
+                                        .accessibilityLabel("导出原音片段 \(part.index + 1)")
+                                        .accessibilityIdentifier("audio-share-\(part.index)")
                                 }
                             }
                         }

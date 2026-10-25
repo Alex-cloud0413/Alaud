@@ -11,8 +11,8 @@ packages:
 settings:
   base:
     SWIFT_VERSION: '5.0'
-    MARKETING_VERSION: '0.1.0'
-    CURRENT_PROJECT_VERSION: '1'
+    MARKETING_VERSION: '0.1.1'
+    CURRENT_PROJECT_VERSION: '2'
     CODE_SIGN_STYLE: Automatic
     DEVELOPMENT_TEAM: ''
     ENABLE_USER_SCRIPT_SANDBOXING: YES
@@ -49,7 +49,7 @@ targets:
       - target: AlaudWatch
         embed: true
     scheme:
-      testTargets: [AlaudTests]
+      testTargets: [AlaudTests, AlaudUITests]
   AlaudWatch:
     type: application
     platform: watchOS
@@ -84,3 +84,14 @@ targets:
     dependencies:
       - target: Alaud
       - package: AlaudCore
+  AlaudUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources: [Tests/UI]
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: com.gaoyiming.alaud.uitests
+        TEST_TARGET_NAME: Alaud
+    dependencies:
+      - target: Alaud

@@ -2,7 +2,7 @@ import Foundation
 import CryptoKit
 
 public enum StoreError: LocalizedError {
-    case invalidPart, checksumMismatch, conflictingPart, missingMeeting, incompleteMeeting
+    case invalidPart, checksumMismatch, conflictingPart, missingMeeting, incompleteMeeting, unconfirmedCleanup
     public var errorDescription: String? {
         switch self {
         case .invalidPart: return "录音片段格式无效，原文件已保留。"
@@ -10,6 +10,7 @@ public enum StoreError: LocalizedError {
         case .conflictingPart: return "片段与已保存的录音冲突，未覆盖现有内容。"
         case .missingMeeting: return "找不到这场会议。"
         case .incompleteMeeting: return "录音尚未全部同步。"
+        case .unconfirmedCleanup: return "完整保存确认与本地录音不符，手表原音继续保留。"
         }
     }
 }
@@ -45,6 +46,10 @@ public final class MeetingStore: @unchecked Sendable {
 
     public func load(_ id: UUID) throws -> Meeting {
         try synchronized { try decoder.decode(Meeting.self, from: Data(contentsOf: manifestURL(id))) }
+    }
+
+    public func contains(_ id: UUID) -> Bool {
+        synchronized { FileManager.default.fileExists(atPath: manifestURL(id).path) }
     }
 
     public func list() throws -> [Meeting] {
@@ -117,6 +122,82 @@ public final class MeetingStore: @unchecked Sendable {
             mergeCapture(from: incoming, into: &meeting)
             try save(meeting)
         }
+    }
+
+    /// Only the phone calls this. A transferred file or a saved final manifest alone is insufficient.
+    public func storedMeetingReceipt(for id: UUID) throws -> StoredMeetingReceipt? {
+        try synchronized {
+            guard contains(id) else { return nil }
+            let meeting = try load(id)
+            guard meeting.source == .watch, meeting.isComplete,
+                  meeting.captureState == .finished || meeting.captureState == .interrupted else { return nil }
+            for part in meeting.parts {
+                let url = try audioURL(meetingID: id, part: part)
+                guard FileManager.default.fileExists(atPath: url.path) else { return nil }
+                guard try Self.digest(url) == part.sha256 else { throw StoreError.checksumMismatch }
+                try Self.synchronizeFile(url)
+            }
+            try Self.synchronizeFile(manifestURL(id))
+            return StoredMeetingReceipt(meeting: meeting)
+        }
+    }
+
+    /// Used for pre-upgrade meetings whose legacy acknowledgements were already saved on the watch.
+    public func missingPartIndices(from incoming: Meeting) throws -> [Int] {
+        try synchronized {
+            guard incoming.source == .watch, incoming.isComplete, incoming.parts.allSatisfy(Self.valid) else { throw StoreError.invalidPart }
+            guard contains(incoming.id) else { return incoming.parts.map(\.index) }
+            let local = try load(incoming.id)
+            return try incoming.parts.compactMap { part in
+                guard let saved = local.parts.first(where: { $0.index == part.index }) else { return part.index }
+                guard saved.sha256 == part.sha256 else { throw StoreError.conflictingPart }
+                let url = try audioURL(meetingID: incoming.id, part: part)
+                guard FileManager.default.fileExists(atPath: url.path) else { return part.index }
+                guard try Self.digest(url) == part.sha256 else { throw StoreError.checksumMismatch }
+                return nil
+            }
+        }
+    }
+
+    /// Only the watch calls this. Atomically leave the queue before deleting, so an interrupted cleanup
+    /// cannot leave a half-deleted UUID directory that prevents the next launch from opening its store.
+    @discardableResult
+    public func removeConfirmedWatchCopy(_ receipt: StoredMeetingReceipt) throws -> Bool {
+        try synchronized {
+            guard contains(receipt.meetingID) else { return false } // duplicate or late receipt
+            let meeting = try load(receipt.meetingID)
+            guard receipt.confirms(meeting) else { throw StoreError.unconfirmedCleanup }
+            let directory = directory(for: meeting.id)
+            let entries = try FileManager.default.contentsOfDirectory(at: directory, includingPropertiesForKeys: nil)
+            let originals = entries.filter { ["caf", "m4a", "wav"].contains($0.pathExtension.lowercased()) }
+            let expected = Set(meeting.parts.map(\.filename))
+            guard originals.allSatisfy({ expected.contains($0.lastPathComponent) }) else { throw StoreError.unconfirmedCleanup }
+            // No transport receipt can authorize dropping an unregistered/orphaned audio file.
+            let cleanup = root.appendingPathComponent(".cleanup", isDirectory: true)
+            try FileManager.default.createDirectory(at: cleanup, withIntermediateDirectories: true)
+            let staged = cleanup.appendingPathComponent(meeting.id.uuidString, isDirectory: true)
+            try FileManager.default.moveItem(at: directory, to: staged)
+            try FileManager.default.removeItem(at: staged)
+            return true
+        }
+    }
+
+    /// The .cleanup rename is itself the persisted authorization; retry removal after a crash.
+    public func finishConfirmedCleanup() throws {
+        try synchronized {
+            let cleanup = root.appendingPathComponent(".cleanup", isDirectory: true)
+            guard FileManager.default.fileExists(atPath: cleanup.path) else { return }
+            for entry in try FileManager.default.contentsOfDirectory(at: cleanup, includingPropertiesForKeys: nil)
+                where UUID(uuidString: entry.lastPathComponent) != nil {
+                try FileManager.default.removeItem(at: entry)
+            }
+        }
+    }
+
+    private static func synchronizeFile(_ url: URL) throws {
+        let handle = try FileHandle(forWritingTo: url)
+        defer { try? handle.close() }
+        try handle.synchronize()
     }
 
     private func existingOrNew(_ incoming: Meeting) throws -> Meeting {

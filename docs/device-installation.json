@@ -1,21 +1,22 @@
 {
-  "verifiedAt": "2026-10-25T19:05:21+08:00",
+  "verifiedAt": "2026-10-25T19:49:55+08:00",
   "phone": {
     "device": "iPhone 17",
     "bundleIdentifier": "com.gaoyiming.alaud",
-    "version": "0.1.0",
-    "build": "1",
+    "version": "0.1.1",
+    "build": "2",
     "installed": true,
     "installedAppReadback": true,
     "launched": true,
     "runningProcessReadback": true,
-    "recordingStartedByAgent": false
+    "recordingStartedByAgent": false,
+    "deviceIncludedInSigningProfile": true
   },
   "watch": {
     "device": "Apple Watch Series 11",
     "bundleIdentifier": "com.gaoyiming.alaud.watchkitapp",
-    "version": "0.1.0",
-    "build": "1",
+    "version": "0.1.1",
+    "build": "2",
     "developerMode": "enabled",
     "installed": true,
     "installedAppReadback": true,
@@ -25,10 +26,35 @@
     "deviceIncludedInSigningProfile": true
   },
   "acceptance": {
-    "microphone": "not_tested",
-    "recording": "not_tested",
-    "transcription": "not_tested",
-    "watchTransfer": "not_tested"
+    "microphone": "user_report_passed_0.1.0",
+    "recording": "user_report_passed_0.1.0",
+    "transcription": "user_report_passed_0.1.0",
+    "watchTransfer": "user_report_passed_0.1.0",
+    "playbackShareRegression": "simulator_ui_test_passed_0.1.1",
+    "watchAutomaticCleanup": "physical_device_file_metadata_verified_0.1.1",
+    "longMeetingBatteryInterruptions": "not_tested"
   },
-  "localPackage": "artifacts/Alaud-0.1.0-development-watch-ready.ipa"
+  "localPackage": "artifacts/Alaud-0.1.1-development.ipa",
+  "storageCleanupVerification": {
+    "verifiedAt": "2026-10-25T19:48:32+08:00",
+    "method": "devicectl_file_metadata_before_after",
+    "audioContentsCopiedToMac": false,
+    "transcriptContentsCopiedToMac": false,
+    "manualDeletion": false,
+    "phone": {
+      "beforeAudioFiles": 1,
+      "afterAudioFiles": 1,
+      "beforeAudioBytes": 1283858,
+      "afterAudioBytes": 1283858,
+      "originalRelativePathsAndSizesUnchanged": true,
+      "afterMeetingManifestCount": 1
+    },
+    "watch": {
+      "beforeAudioFiles": 1,
+      "afterAudioFiles": 0,
+      "beforeAudioBytes": 1283858,
+      "afterAudioBytes": 0,
+      "afterMeetingManifestCount": 0
+    }
+  }
 }

@@ -50,6 +50,17 @@
                ReferencedContainer = "container:Alaud.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "EBFAE8DD68EBF4598FA93EC7"
+               BuildableName = "AlaudUITests.xctest"
+               BlueprintName = "AlaudUITests"
+               ReferencedContainer = "container:Alaud.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <CommandLineArguments>
       </CommandLineArguments>

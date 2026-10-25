@@ -50,9 +50,11 @@ struct SettingsView: View {
                         .font(.subheadline)
                 }
                 Section("存储") {
-                    Text("手机录音保存在本机；手表录音通过配对连接传到手机。手表原音会继续保留，当前版本不会自动清理。卸载 App 会删除该设备的本地数据，请先导出重要会议。")
+                    Text("手机保存原音、转写和跟进事项。手表录音结束后，通过配对连接同步；手机确认整场原音完整保存并校验通过后，手表自动删除本地副本。断线、缺片或确认未到达时继续保留。")
                         .font(.subheadline).foregroundStyle(.secondary)
-                    LabeledContent("版本", value: "Alaud 0.1 · 开发版")
+                    Text("原音约 115 MB/小时。目前没有独立云同步或云备份；卸载手机 App 前，请先导出重要会议。")
+                        .font(.footnote).foregroundStyle(.secondary)
+                    LabeledContent("版本", value: "Alaud 0.1.1 · 开发版")
                 }
             }
             .navigationTitle("设置").navigationBarTitleDisplayMode(.inline)

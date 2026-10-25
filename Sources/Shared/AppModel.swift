@@ -20,8 +20,13 @@ final class AppModel: ObservableObject {
     #endif
 
     init(root: URL? = nil) throws {
-        let base = root ?? FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+        var base = root ?? FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("Alaud/Meetings", isDirectory: true)
+        #if DEBUG && targetEnvironment(simulator)
+        if ProcessInfo.processInfo.arguments.contains("--playback-ui-test") {
+            base = base.appendingPathComponent(".playback-ui-test", isDirectory: true)
+        }
+        #endif
         store = try MeetingStore(root: base)
         recorder = MeetingRecorder(store: store)
         transfer = WatchTransfer(store: store)

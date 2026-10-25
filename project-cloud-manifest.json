@@ -43,5 +43,6 @@
     "driveByteCount": 1650937,
     "freshCloneFileCount": 56,
     "method": "fresh_clone_and_sha256_all_tracked_files"
-  }
+  },
+  "developmentVersion": "0.1.1 (2)"
 }
