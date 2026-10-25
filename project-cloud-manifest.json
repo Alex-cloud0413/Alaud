@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "projectId": "alaud",
+  "title": "Alaud",
+  "stage": "development-prototype",
+  "github": {
+    "repo": "Alex-cloud0413/Alaud",
+    "branch": "main",
+    "visibility": "private"
+  },
+  "feishu": {
+    "driveFolderToken": "JaqXfd0nalR5rodxatUc5dZPnjr",
+    "driveFolderUrl": "https://ymqanrzvyp.feishu.cn/drive/folder/JaqXfd0nalR5rodxatUc5dZPnjr",
+    "wikiOrDocumentUrl": ""
+  },
+  "storage": {
+    "git": [
+      "源码",
+      "产品边界",
+      "研究和验证记录",
+      "配置模板"
+    ],
+    "drive": [
+      "虚构或合成内容的界面截图",
+      "必要开发交付材料"
+    ],
+    "deviceOnly": [
+      "真实会议原音",
+      "真实转写与备注",
+      "真实跟进事项"
+    ],
+    "rebuildableLocal": [
+      ".build",
+      "DerivedData",
+      "artifacts",
+      "签名安装包"
+    ]
+  },
+  "lastVerified": {
+    "githubCommit": "",
+    "verifiedAt": "2026-10-25T16:05:45+08:00",
+    "driveFileCount": 5,
+    "driveByteCount": 1650937
+  }
+}

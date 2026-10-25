@@ -1,0 +1,43 @@
+{
+  "verifiedAt": "2026-10-25T16:05:45+08:00",
+  "driveFolder": "https://ymqanrzvyp.feishu.cn/drive/folder/JaqXfd0nalR5rodxatUc5dZPnjr",
+  "screenshots": [
+    {
+      "filename": "inbox-empty-light.png",
+      "bytes": 317998,
+      "sha256": "ace33e87cf388c8cd184b1465ad463028f4aea354ba02a9d8778bc1ea0e8aae9",
+      "freshDownloadVerified": true
+    },
+    {
+      "filename": "inbox-demo-light.png",
+      "bytes": 369018,
+      "sha256": "cc00f5151eeb5c2500c8d9cd1f01a622f87bd435422202a5152afc9120dfb728",
+      "freshDownloadVerified": true
+    },
+    {
+      "filename": "detail-demo-light.png",
+      "bytes": 268094,
+      "sha256": "7f4d89c764a0203c6029ebed8d6bfcd2517ba46f9dd0231a1620a54dc461081a",
+      "freshDownloadVerified": true
+    },
+    {
+      "filename": "detail-demo-dark.png",
+      "bytes": 270860,
+      "sha256": "f5600195820327399e7ea5331de7b1631d25a056b65690c2a0f150a72c5a8d7e",
+      "freshDownloadVerified": true
+    },
+    {
+      "filename": "settings-light.png",
+      "bytes": 424967,
+      "sha256": "2930585fb514bd25043c61cf84e0b945e171389bb1def67c70b4db38a6e11a3b",
+      "freshDownloadVerified": true
+    }
+  ],
+  "excluded": [
+    "真实会议数据",
+    "开发签名与安装包",
+    "构建缓存"
+  ],
+  "deviceInstallation": "deferred_by_user",
+  "portfolioSync": "failed_due_to_preexisting_missing_execution_plan"
+}

@@ -1,0 +1,15 @@
+.DS_Store
+.build/
+DerivedData/
+build/
+*.xcuserstate
+xcuserdata/
+Config/Local.xcconfig
+*.mobileprovision
+*.p12
+*.m4a
+*.caf
+*.wav
+.env*
+!*.example
+artifacts/

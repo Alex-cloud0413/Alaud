@@ -1,0 +1,86 @@
+name: Alaud
+options:
+  bundleIdPrefix: com.gaoyiming.alaud
+  deploymentTarget:
+    iOS: '26.0'
+    watchOS: '26.0'
+  createIntermediateGroups: true
+packages:
+  AlaudCore:
+    path: .
+settings:
+  base:
+    SWIFT_VERSION: '5.0'
+    MARKETING_VERSION: '0.1.0'
+    CURRENT_PROJECT_VERSION: '1'
+    CODE_SIGN_STYLE: Automatic
+    DEVELOPMENT_TEAM: ''
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+    SWIFT_EMIT_LOC_STRINGS: YES
+    ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+    DEVELOPMENT_LANGUAGE: zh-Hans
+    GENERATE_INFOPLIST_FILE: NO
+targets:
+  Alaud:
+    type: application
+    platform: iOS
+    sources:
+      - Sources/Shared
+      - Sources/Phone
+    info:
+      path: Config/Phone-Info.plist
+      properties:
+        CFBundleDisplayName: Alaud
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        LSApplicationCategoryType: public.app-category.productivity
+        NSMicrophoneUsageDescription: 用于录制你主动开始的会议，并保存原音供会后核对。
+        NSSpeechRecognitionUsageDescription: 将已保存的会议录音转成可检索的文字。
+        UIBackgroundModes: [audio]
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait, UIInterfaceOrientationPortraitUpsideDown, UIInterfaceOrientationLandscapeLeft, UIInterfaceOrientationLandscapeRight]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.gaoyiming.alaud
+        TARGETED_DEVICE_FAMILY: '1,2'
+        INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: NO
+    dependencies:
+      - package: AlaudCore
+      - target: AlaudWatch
+        embed: true
+    scheme:
+      testTargets: [AlaudTests]
+  AlaudWatch:
+    type: application
+    platform: watchOS
+    sources:
+      - Sources/Shared
+      - Sources/Watch
+    info:
+      path: Config/Watch-Info.plist
+      properties:
+        CFBundleDisplayName: Alaud
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSMicrophoneUsageDescription: 用于录制你主动开始的会议，结束后同步到配对 iPhone。
+        WKApplication: true
+        WKCompanionAppBundleIdentifier: com.gaoyiming.alaud
+        UIBackgroundModes: [audio]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.gaoyiming.alaud.watchkitapp
+        TARGETED_DEVICE_FAMILY: '4'
+        SKIP_INSTALL: YES
+    dependencies:
+      - package: AlaudCore
+  AlaudTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: [Tests/App]
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: com.gaoyiming.alaud.tests
+    dependencies:
+      - target: Alaud
+      - package: AlaudCore
