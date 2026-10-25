@@ -1,9 +1,9 @@
 # Alaud
 
-Native iOS / watchOS meeting recorder. Read `docs/PRODUCT.md` and `docs/VALIDATION.md` before changing scope or reporting readiness.
+Native iOS / watchOS / macOS meeting recorder. Read `docs/PRODUCT.md` and `docs/VALIDATION.md` before changing scope or reporting readiness.
 
 - Product name: Alaud. Phone bundle ID `com.gaoyiming.alaud`, Watch ID `com.gaoyiming.alaud.watchkitapp`; update the companion ID together if renaming.
-- `Sources/Core` is a UI-independent Swift package. `Sources/Shared` contains device recording, transfer, runtime and intents. Platform views live in `Sources/Phone` and `Sources/Watch`.
+- `Sources/Core` is a UI-independent Swift package. `Sources/Shared` contains device recording, transfer, runtime and intents. Platform views live in `Sources/Phone`, `Sources/Watch` and `Sources/Mac`.
 - Generate the Xcode project with `xcodegen generate` after editing `project.yml`. Keep developer-team values out of committed files; set them in Xcode or pass `DEVELOPMENT_TEAM` when building.
 - Preserve watch originals until a fresh full-meeting storage receipt confirms the phone has persisted and hashed every original and final manifest. Legacy part/final acknowledgements and WCSession completion do not authorize deletion. Copy incoming WCSession temporary files synchronously before returning from the delegate.
 - Cleanup is automatic on the watch after full proof, using an atomic move into .cleanup before removal. Reject incomplete/live meetings, mismatched receipts, and unregistered audio. Never run watch cleanup against the phone store.
@@ -15,3 +15,8 @@ Native iOS / watchOS meeting recorder. Read `docs/PRODUCT.md` and `docs/VALIDATI
 - Run `swift test` for model/storage changes. Audio writer changes also require the hosted iOS tests, including the 90-minute synthetic stream and format-conversion case.
 - Keep simulator compilation, synthetic file tests, visual review and real-device acceptance separate. `docs/DEVICE_ACCEPTANCE.md` remains open until real evidence exists.
 - Raw meeting audio, transcripts, signing state and credentials stay off GitHub and developer-material uploads. Cloud pointers are in `project-cloud-manifest.json`.
+
+- Phone/Mac originals may be evicted only after full cloud proof under a freshly verified account. Upload completion, complete metadata publication, hashes, byte counts and no active audio lease are all required; failures retain originals.
+- iCloud uses immutable Drive audio + metadata commits/heads; use `evictUbiquitousItem` only for cloud mirrors. Never remove a cloud URL to release a cache. Do not reintroduce CloudKit environment assumptions.
+- Meeting metadata and ASR checkpoints must merge atomically with edits made during an upload. Remote immutable audio inventories cannot silently change.
+- Cloud probes use synthetic data in a separate Drive folder and local root. Never include real recordings, transcripts, account tokens or signing state in verification artifacts.

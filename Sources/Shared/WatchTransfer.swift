@@ -51,6 +51,17 @@ final class WatchTransfer: NSObject, WCSessionDelegate, @unchecked Sendable {
         #endif
     }
 
+    func confirmStoredMeetings() {
+        #if os(iOS)
+        guard let session, session.activationState == .activated else { return }
+        do {
+            for meeting in try store.list() where meeting.source == .watch && meeting.isComplete {
+                try sendStorageReceipt(for: meeting.id, session: session)
+            }
+        } catch { report(error) }
+        #endif
+    }
+
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         if let error { report(error) }
         pump(); changed()

@@ -15,26 +15,37 @@ final class AppModel: ObservableObject {
     let transfer: WatchTransfer
     @Published private(set) var meetings: [Meeting] = []
     @Published var errorMessage: String?
-    #if os(iOS)
+    #if !os(watchOS)
+    let cloud: CloudLibrary
     let transcription: TranscriptionService
     #endif
 
     init(root: URL? = nil) throws {
         var base = root ?? FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("Alaud/Meetings", isDirectory: true)
-        #if DEBUG && targetEnvironment(simulator)
+        #if DEBUG
+        if ProcessInfo.processInfo.arguments.contains("--cloud-probe") {
+            base = base.appendingPathComponent(".cloud-probe-runtime", isDirectory: true)
+        }
+        #if targetEnvironment(simulator) || os(macOS)
         if ProcessInfo.processInfo.arguments.contains("--playback-ui-test") {
             base = base.appendingPathComponent(".playback-ui-test", isDirectory: true)
+        } else if ProcessInfo.processInfo.arguments.contains("--demo") {
+            base = base.appendingPathComponent(".demo-preview", isDirectory: true)
         }
+        #endif
         #endif
         store = try MeetingStore(root: base)
         recorder = MeetingRecorder(store: store)
         transfer = WatchTransfer(store: store)
-        #if os(iOS)
-        transcription = TranscriptionService(store: store)
+        #if !os(watchOS)
+        cloud = try CloudLibrary(store: store)
+        transcription = TranscriptionService(store: store, cloud: cloud)
         #endif
         #if os(watchOS)
         try recorder.recoverPreviousSessions(source: .watch)
+        #elseif os(macOS)
+        try recorder.recoverPreviousSessions(source: .mac)
         #else
         try recorder.recoverPreviousSessions(source: .phone)
         #endif
@@ -43,14 +54,15 @@ final class AppModel: ObservableObject {
                 $0.transcriptState = .failed; $0.transcriptError = "上次转写被系统中止；已保存的进度会在重试时继续。"
             }
         }
-        recorder.onChange = { [weak self] in self?.refresh(); self?.transfer.pump(); self?.processPending() }
-        transfer.onChange = { [weak self] in self?.refresh(); self?.processPending() }
+        recorder.onChange = { [weak self] in self?.refresh(); self?.transfer.pump(); self?.scheduleCloudSync(); self?.processPending() }
+        transfer.onChange = { [weak self] in self?.refresh(); self?.scheduleCloudSync(); self?.processPending() }
         transfer.onError = { [weak self] in self?.errorMessage = $0 }
-        #if os(iOS)
-        transcription.onChange = { [weak self] in self?.refresh() }
+        #if !os(watchOS)
+        transcription.onChange = { [weak self] in self?.refresh(); self?.scheduleCloudSync() }
+        cloud.onSynchronized = { [weak self] in self?.refresh(); self?.transfer.confirmStoredMeetings() }
         #endif
         refresh()
-        #if DEBUG && os(iOS)
+        #if DEBUG && !os(watchOS)
         if ProcessInfo.processInfo.arguments.contains("--demo") { try seedDemo() }
         #endif
     }
@@ -60,7 +72,7 @@ final class AppModel: ObservableObject {
     }
     func meeting(_ id: UUID) -> Meeting? { meetings.first { $0.id == id } }
     func update(_ id: UUID, _ change: (inout Meeting) -> Void) {
-        do { try store.update(id, change); refresh() } catch { errorMessage = error.localizedDescription }
+        do { try store.update(id, change); refresh(); scheduleCloudSync() } catch { errorMessage = error.localizedDescription }
     }
     func start() async {
         do { try await recorder.start() } catch { errorMessage = error.localizedDescription }
@@ -71,12 +83,23 @@ final class AppModel: ObservableObject {
     func resume() {
         do { try recorder.resume() } catch { errorMessage = error.localizedDescription }
     }
-    func becameActive() { refresh(); transfer.pump(); processPending() }
+    func becameActive() { refresh(); transfer.pump(); scheduleCloudSync(); processPending() }
+    private func scheduleCloudSync() {
+        #if !os(watchOS)
+        cloud.scheduleSync()
+        #endif
+    }
     func processPending() {
-        #if os(iOS)
+        #if !os(watchOS)
         guard (UserDefaults.standard.object(forKey: "autoTranscribe") as? Bool ?? true),
               !transcription.isWorking, recorder.activeID == nil else { return }
-        guard let next = meetings.first(where: { $0.isComplete && $0.transcriptState == .waiting }) else { return }
+        guard let next = meetings.first(where: {
+            #if os(macOS)
+            return $0.source == .mac && $0.isComplete && $0.transcriptState == .waiting
+            #else
+            return $0.source != .mac && $0.isComplete && $0.transcriptState == .waiting
+            #endif
+        }) else { return }
         Task {
             await transcription.transcribe(next.id)
             refresh()

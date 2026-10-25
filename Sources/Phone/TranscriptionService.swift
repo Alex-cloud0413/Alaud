@@ -22,8 +22,9 @@ final class TranscriptionService: ObservableObject {
     @Published private(set) var preparationMessage: String?
     var onChange: (() -> Void)?
     private let store: MeetingStore
+    private let cloud: CloudLibrary
 
-    init(store: MeetingStore) { self.store = store }
+    init(store: MeetingStore, cloud: CloudLibrary) { self.store = store; self.cloud = cloud }
 
     func prepareModel() async {
         guard !preparing, !isWorking else { return }
@@ -50,7 +51,9 @@ final class TranscriptionService: ObservableObject {
             onChange?()
             for part in meeting.parts where !meeting.transcribedPartIndices.contains(part.index) {
                 try Task.checkCancellation()
-                let file = try AVAudioFile(forReading: store.audioURL(meetingID: id, part: part))
+                let lease = try await cloud.acquireAudio(meetingID: id, part: part)
+                defer { Task { await cloud.releaseAudio(lease) } }
+                let file = try AVAudioFile(forReading: lease.url)
                 let module = try await makeModule()
                 let analyzer = SpeechAnalyzer(modules: [module])
                 let collect = Task { () throws -> [TranscriptLine] in

@@ -1,0 +1,21 @@
+{
+  "files": [
+    {
+      "name": "Alaud-0.2-Mac-合成详情.png",
+      "url": "https://ymqanrzvyp.feishu.cn/file/NJwrbsxnXoQcsQx3z10cN8Rdn4g",
+      "bytes": 287077,
+      "sha256": "e501ea8df09d9e7804c6735e294fc44f71c4612578a33d483b1590aba7558cc7",
+      "downloadHashVerified": true,
+      "syntheticOnly": true
+    },
+    {
+      "name": "Alaud-0.2-Mac-合成待办.png",
+      "url": "https://ymqanrzvyp.feishu.cn/file/FmHWbuBDlovY8KxrHjvcjkngnPd",
+      "bytes": 85986,
+      "sha256": "1182b43f02a5b89cb36e6f543f249c4e8a3896bdd262c2d51329443a2edbbd39",
+      "downloadHashVerified": true,
+      "syntheticOnly": true
+    }
+  ],
+  "failed": 0
+}

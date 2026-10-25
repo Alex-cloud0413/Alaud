@@ -25,7 +25,7 @@ struct WatchRecordingView: View {
             ScrollView {
                 VStack(spacing: 12) {
                     if let id = recorder.activeID, let meeting = model.meeting(id) {
-                        Text(recorder.isRecording ? "正在录音" : "已暂停").font(.headline).foregroundStyle(recorder.isRecording ? .red : .orange)
+                        Text(recorder.isRecording ? "正在录音" : "已暂停").font(.headline).foregroundStyle(.primary)
                         TimelineView(.periodic(from: .now, by: 1)) { context in
                             Text(clock(context.date.timeIntervalSince(meeting.createdAt)))
                                 .font(.system(.title2, design: .monospaced)).monospacedDigit()
@@ -36,7 +36,7 @@ struct WatchRecordingView: View {
                             } label: { Image(systemName: recorder.isRecording ? "pause.fill" : "play.fill").frame(minHeight: 42) }
                                 .accessibilityLabel(recorder.isRecording ? "暂停录音" : "继续录音")
                             Button { model.stop() } label: { Image(systemName: "stop.fill").frame(minHeight: 42) }
-                                .tint(.red).accessibilityLabel("结束录音")
+                                .tint(.white).accessibilityLabel("结束录音")
                         }
                         Text("原音已在手表保存\n结束后到 iPhone 跟进")
                             .font(.caption2).foregroundStyle(.secondary).multilineTextAlignment(.center)
@@ -45,16 +45,16 @@ struct WatchRecordingView: View {
                             VStack(spacing: 8) {
                                 Image(systemName: "mic.fill").font(.system(size: 34, weight: .medium))
                                 Text("开始录音").font(.headline)
-                            }.frame(maxWidth: .infinity).padding(.vertical, 18)
-                        }.buttonStyle(.borderedProminent).tint(.red).disabled(recorder.isBusy)
+                            }.frame(maxWidth: .infinity).padding(.vertical, 18).foregroundStyle(.black)
+                        }.buttonStyle(.borderedProminent).tint(.white).disabled(recorder.isBusy)
                         Text(waiting > 0 ? "\(waiting) 场录音等待手机确认" : "抬腕记录，手机跟进")
                             .font(.caption2).foregroundStyle(.secondary).multilineTextAlignment(.center)
                         if waiting > 0 { Button("重试同步") { model.transfer.pump(); model.refresh() }.font(.caption) }
-                        Text("手机完整保存后\n自动清理手表副本")
+                        Text("交接确认后\n自动释放手表空间")
                             .font(.caption2).foregroundStyle(.secondary).multilineTextAlignment(.center)
                     }
                     if let error = model.errorMessage ?? recorder.errorMessage {
-                        Text(error).font(.caption2).foregroundStyle(.orange)
+                        Text(error).font(.caption2).foregroundStyle(.secondary)
                         Button("关闭提示") { model.errorMessage = nil }.font(.caption2)
                     }
                 }.padding(.horizontal, 4)

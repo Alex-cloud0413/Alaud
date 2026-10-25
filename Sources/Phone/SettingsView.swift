@@ -3,62 +3,73 @@ import SwiftUI
 struct SettingsView: View {
     @ObservedObject var model: AppModel
     @ObservedObject private var transcription: TranscriptionService
+    @ObservedObject private var cloud: CloudLibrary
     @Environment(\.dismiss) private var dismiss
     @AppStorage("reduceCallInterruptions") private var reduceCallInterruptions = true
     @AppStorage("autoTranscribe") private var autoTranscribe = true
     @AppStorage("transcriptionLocale") private var locale = "zh-CN"
-    init(model: AppModel) { self.model = model; transcription = model.transcription }
+    init(model: AppModel) { self.model = model; transcription = model.transcription; cloud = model.cloud }
 
     var body: some View {
         NavigationStack {
             Form {
                 Section {
-                    Toggle("减少来电造成的录音中断", isOn: $reduceCallInterruptions)
-                } header: { Text("录音保护") } footer: {
-                    Text("iPhone 使用横幅来电时可减少中断；全屏来电和接听电话仍可能打断录音。设置在下次开始或继续录音时生效。")
-                }
-                Section("会议专注模式") {
-                    Text("在快捷指令里，把「设置专注模式」放在「开始会议录音」之前；结束时先运行「结束会议录音」，再关闭本次会议专注模式。")
-                        .font(.subheadline)
-                    Text("专注模式应覆盖整段录音，切换 App 或锁屏时继续保留。系统闹钟不会因此关闭。")
-                        .font(.footnote).foregroundStyle(.secondary)
+                    CloudStatusLine(cloud: cloud)
+                    if let issue = cloud.lastIssue { Label(issue, systemImage: "exclamationmark.circle").font(.footnote).foregroundStyle(.secondary) }
+                    #if DEBUG
+                    if let diagnostic = cloud.diagnosticDetails {
+                        DisclosureGroup("连接诊断") { Text(diagnostic).font(.caption.monospaced()).textSelection(.enabled) }
+                    }
+                    #endif
+                    if let date = cloud.lastSync { LabeledContent("最近同步", value: date.formatted(date: .omitted, time: .shortened)) }
+                    LabeledContent("本机原音缓存", value: ByteCountFormatter.string(fromByteCount: cloud.cacheBytes, countStyle: .file))
+                    Button("立即同步", systemImage: "arrow.triangle.2.circlepath") { Task { await cloud.sync() } }.disabled(cloud.isSyncing)
+                    Button("释放已上传的原音缓存", systemImage: "internaldrive") { Task { await cloud.releaseCaches() } }
+                } header: { Text("iCloud 录音库") } footer: {
+                    Text("原音完整上传后自动释放本机副本，回听时按需下载。正在使用和未上传的原音会保留。iPhone 和 Mac 使用同一 Apple 账号即可同步，云端文件占用你的 iCloud 空间。")
                 }
                 Section {
                     Toggle("录音结束后自动转写", isOn: $autoTranscribe)
-                    Picker("录音语言", selection: $locale) {
-                        Text("简体中文").tag("zh-CN")
-                        Text("English").tag("en-US")
-                    }.disabled(transcription.isWorking || transcription.preparing)
+                    Picker("录音语言", selection: $locale) { Text("简体中文").tag("zh-CN"); Text("English").tag("en-US") }
+                        .disabled(transcription.isWorking || transcription.preparing)
                     Button {
                         Task { await transcription.prepareModel(); model.processPending() }
                     } label: {
-                        HStack {
-                            Text("准备离线转写模型")
-                            if transcription.preparing { Spacer(); ProgressView() }
-                        }
+                        HStack { Text("准备离线转写模型"); if transcription.preparing { Spacer(); ProgressView() } }
                     }.disabled(transcription.preparing || transcription.isWorking)
                     if let message = transcription.preparationMessage { Text(message).font(.footnote).foregroundStyle(.secondary) }
                 } header: { Text("本机转写") } footer: {
-                    Text("首次准备需要联网下载 Apple 的语音模型，之后在 iPhone 上处理。录音不会发送给云端转写服务；系统暂停处理时，可回到 App 继续。")
+                    Text("首次需要下载 Apple 语音模型，之后在本机处理。模型会占用本机空间；云端原音在转写时临时下载，完成后释放。")
                 }
-                Section("快捷指令与操作按钮") {
-                    Text("在「快捷指令」中搜索 Alaud，可添加「开始会议录音」「结束会议录音」或「开始或结束会议录音」，再绑定到支持的操作按钮。首次使用请打开 App 授予麦克风权限。")
-                        .font(.subheadline)
+                #if os(iOS)
+                Section {
+                    Toggle("减少来电造成的录音中断", isOn: $reduceCallInterruptions)
+                } header: { Text("录音保护") } footer: {
+                    Text("横幅来电可减少中断；全屏来电和接听仍可能打断录音。设置在下次开始或继续录音时生效。")
                 }
-                Section("交给 Agent") {
-                    Text("在会议详情中导出 Markdown 或 JSON，保留原文时间点、录音缺口和跟进事项。")
-                        .font(.subheadline)
-                }
-                Section("存储") {
-                    Text("手机保存原音、转写和跟进事项。手表录音结束后，通过配对连接同步；手机确认整场原音完整保存并校验通过后，手表自动删除本地副本。断线、缺片或确认未到达时继续保留。")
-                        .font(.subheadline).foregroundStyle(.secondary)
-                    Text("原音约 115 MB/小时。目前没有独立云同步或云备份；卸载手机 App 前，请先导出重要会议。")
+                Section("专注模式与快捷入口") {
+                    Text("在快捷指令中，先开启「会议」专注模式，再运行 Alaud「开始会议录音」；结束时先结束录音，再关闭专注模式。")
+                    Text("可将「开始或结束会议录音」绑定到操作按钮。锁屏或切换 App 时应保留专注模式，系统闹钟仍可能响起。")
                         .font(.footnote).foregroundStyle(.secondary)
-                    LabeledContent("版本", value: "Alaud 0.1.1 · 开发版")
+                }
+                #endif
+                Section("数据与交接") {
+                    Text("手表在 iPhone 完整接收后清理原音；iPhone 和 Mac 在 iCloud 完整保存确认后清理本机原音。上传失败时，本机文件继续保留。")
+                    Text("转写、备注和待办保留轻量本地索引。详情可导出 Markdown、JSON 和原音；Agent 执行范围尚未定义。")
+                        .font(.footnote).foregroundStyle(.secondary)
+                    Text("iCloud Drive 中的 Alaud 文件夹保存云端原音与历史版本。云端同步不替代独立备份，重要会议仍建议导出。")
+                        .font(.footnote).foregroundStyle(.secondary)
+                    LabeledContent("版本", value: "Alaud 0.2.0 · 开发版")
                 }
             }
-            .navigationTitle("设置").navigationBarTitleDisplayMode(.inline)
+            .formStyle(.grouped).tint(.primary)
+            .navigationTitle("设置").alaudInlineTitle()
+            #if os(iOS)
             .toolbar { ToolbarItem(placement: .confirmationAction) { Button("完成") { dismiss() } } }
+            #endif
         }
+        #if os(macOS)
+        .frame(minWidth: 500)
+        #endif
     }
 }

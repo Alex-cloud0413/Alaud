@@ -1,0 +1,45 @@
+{
+  "verifiedAt": "2026-10-25T14:29:52Z",
+  "backend": "iCloud Drive",
+  "mac": {
+    "method": "native_app_debug_probe_ui",
+    "syntheticOnly": true,
+    "uploadEvictDownloadHashAndRelease": "passed",
+    "downloadedBytes": 4096,
+    "cachedAudioBytesAfterRelease": 0
+  },
+  "phoneCrossDevice": {
+    "backend": "iCloud Drive",
+    "cachedAudioBytesAfterRelease": 0,
+    "cachedAudioBytesBeforeDownload": 0,
+    "downloadedBytes": 4096,
+    "hashMatches": true,
+    "meetingCount": 1,
+    "passed": true,
+    "readExistingRemoteFixture": true,
+    "syntheticOnly": true,
+    "verifiedAt": "2026-10-25T14:29:52Z",
+    "verifyOnly": true
+  },
+  "realMeetingMigration": {
+    "verifiedAt": "2026-10-25T22:39:58+08:00",
+    "method": "devicectl_file_metadata_before_after",
+    "realAudioOrTranscriptCopiedIntoDevelopmentArtifacts": false,
+    "manualDeletion": false,
+    "phone": {
+      "beforeAudioFiles": 1,
+      "beforeAudioBytes": 1283858,
+      "afterAudioFiles": 0,
+      "afterAudioBytes": 0,
+      "afterMeetingManifestCount": 1,
+      "afterCloudReceiptCount": 1
+    },
+    "watch": {
+      "afterAudioFiles": 0,
+      "afterMeetingManifestCount": 0
+    },
+    "macLibraryCount": 1,
+    "macAudioCacheBytes": 0
+  },
+  "realMicrophoneRecordingStartedByAgent": false
+}

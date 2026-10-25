@@ -21,6 +21,7 @@ public final class MeetingStore: @unchecked Sendable {
     private let lock = NSRecursiveLock()
     private let encoder: JSONEncoder
     private let decoder: JSONDecoder
+    private var verifiedCloudAccount: String?
 
     public init(root: URL) throws {
         self.root = root
@@ -85,6 +86,90 @@ public final class MeetingStore: @unchecked Sendable {
         }
     }
 
+    public func setVerifiedCloudAccount(_ accountID: String?) { synchronized { verifiedCloudAccount = accountID } }
+
+    public func mergeCloudMeeting(_ remote: Meeting, base: Meeting?) throws {
+        try synchronized {
+            guard remote.isComplete, remote.schemaVersion == 1, remote.parts.allSatisfy(Self.valid),
+                  remote.captureState == .finished || remote.captureState == .interrupted else { throw StoreError.invalidPart }
+            if contains(remote.id) {
+                try save(CloudMeetingMerge.merge(base: base, local: load(remote.id), remote: remote))
+            } else { try save(remote) }
+        }
+    }
+
+    public func cloudProof(for id: UUID) throws -> CloudStorageProof? {
+        try synchronized {
+            let url = directory(for: id).appendingPathComponent("cloud-receipt.json")
+            guard FileManager.default.fileExists(atPath: url.path) else { return nil }
+            return try decoder.decode(CloudStorageProof.self, from: Data(contentsOf: url))
+        }
+    }
+    public func isCloudStored(_ id: UUID) -> Bool {
+        synchronized {
+            guard let account = verifiedCloudAccount, let proof = try? cloudProof(for: id), let meeting = try? load(id) else { return false }
+            return proof.confirms(meeting, accountID: account)
+        }
+    }
+    public func saveCloudProof(_ proof: CloudStorageProof, accountID: String) throws {
+        try synchronized {
+            guard verifiedCloudAccount == accountID, proof.confirms(try load(proof.meetingID), accountID: accountID) else { throw CloudLibraryError.invalidReceipt }
+            let url = directory(for: proof.meetingID).appendingPathComponent("cloud-receipt.json")
+            try encoder.encode(proof).write(to: url, options: .atomic)
+            try Self.synchronizeFile(url)
+        }
+    }
+
+    /// Remove only recoverable originals. Metadata and pending edits remain local.
+    public func evictCloudAudio(meetingID id: UUID, accountID: String, protectedIndices: Set<Int>) throws {
+        try synchronized {
+            guard verifiedCloudAccount == accountID, let proof = try cloudProof(for: id) else { return }
+            let meeting = try load(id)
+            guard proof.confirms(meeting, accountID: accountID) else { throw CloudLibraryError.invalidReceipt }
+            let entries = try FileManager.default.contentsOfDirectory(at: directory(for: id), includingPropertiesForKeys: nil)
+            let registered = Set(meeting.parts.map(\.filename))
+            guard entries.filter({ ["caf", "wav", "m4a"].contains($0.pathExtension.lowercased()) })
+                .allSatisfy({ registered.contains($0.lastPathComponent) }) else { throw CloudLibraryError.invalidReceipt }
+            // Check the complete candidate set before deleting any part.
+            let candidates = try meeting.parts.filter { !protectedIndices.contains($0.index) }.compactMap { part -> URL? in
+                let url = try audioURL(meetingID: id, part: part)
+                guard FileManager.default.fileExists(atPath: url.path) else { return nil }
+                guard try Self.digest(url) == part.sha256 else { throw StoreError.checksumMismatch }
+                return url
+            }
+            for url in candidates { try FileManager.default.removeItem(at: url) }
+        }
+    }
+
+    public func installCloudAudio(from incoming: URL, meetingID: UUID, part: AudioPart) throws {
+        try synchronized {
+            let meeting = try load(meetingID)
+            guard meeting.parts.contains(where: { $0.index == part.index && $0.sha256 == part.sha256 }),
+                  try Self.digest(incoming) == part.sha256 else { throw StoreError.checksumMismatch }
+            let destination = try audioURL(meetingID: meetingID, part: part)
+            if FileManager.default.fileExists(atPath: destination.path) {
+                guard try Self.digest(destination) == part.sha256 else { throw StoreError.conflictingPart }; return
+            }
+            let staging = directory(for: meetingID).appendingPathComponent(UUID().uuidString + ".incoming")
+            defer { try? FileManager.default.removeItem(at: staging) }
+            try FileManager.default.copyItem(at: incoming, to: staging)
+            try Self.synchronizeFile(staging)
+            try FileManager.default.moveItem(at: staging, to: destination)
+            var values = URLResourceValues(); values.isExcludedFromBackup = true
+            var copy = destination; try copy.setResourceValues(values)
+        }
+    }
+
+    public func cachedAudioBytes() throws -> Int64 {
+        try synchronized {
+            try list().flatMap { meeting in try meeting.parts.map { try audioURL(meetingID: meeting.id, part: $0) } }
+                .reduce(Int64(0)) { total, url in
+                    let size = (try? FileManager.default.attributesOfItem(atPath: url.path)[.size] as? NSNumber)?.int64Value ?? 0
+                    return total + size
+                }
+        }
+    }
+
     /// Copy and commit synchronously before returning from didReceive(file:). Ack only after this succeeds.
     public func importPart(from incoming: URL, envelope: TransferEnvelope) throws {
         try synchronized {
@@ -133,7 +218,12 @@ public final class MeetingStore: @unchecked Sendable {
                   meeting.captureState == .finished || meeting.captureState == .interrupted else { return nil }
             for part in meeting.parts {
                 let url = try audioURL(meetingID: id, part: part)
-                guard FileManager.default.fileExists(atPath: url.path) else { return nil }
+                guard FileManager.default.fileExists(atPath: url.path) else {
+                    // Cloud-backed originals may already be evicted. A newly verified account and
+                    // full server proof still let the phone safely complete the watch handoff.
+                    guard isCloudStored(id) else { return nil }
+                    continue
+                }
                 guard try Self.digest(url) == part.sha256 else { throw StoreError.checksumMismatch }
                 try Self.synchronizeFile(url)
             }
@@ -147,6 +237,7 @@ public final class MeetingStore: @unchecked Sendable {
         try synchronized {
             guard incoming.source == .watch, incoming.isComplete, incoming.parts.allSatisfy(Self.valid) else { throw StoreError.invalidPart }
             guard contains(incoming.id) else { return incoming.parts.map(\.index) }
+            if let account = verifiedCloudAccount, let proof = try cloudProof(for: incoming.id), proof.confirms(incoming, accountID: account) { return [] }
             let local = try load(incoming.id)
             return try incoming.parts.compactMap { part in
                 guard let saved = local.parts.first(where: { $0.index == part.index }) else { return part.index }

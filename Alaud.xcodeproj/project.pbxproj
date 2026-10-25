@@ -7,32 +7,64 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0EAC629D0393298871B081E5 /* AlaudCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6991825B25864DF636A9D626 /* AlaudCore */; };
+		0EB6EFEDCE826ABF9FBC00EE /* SegmentWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E20AE15DD072B24D754635 /* SegmentWriter.swift */; };
+		13C7D9DC4E726C139ACC08F0 /* DemoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EF608CC1D0023E1723C8FE /* DemoData.swift */; };
 		1E8A2E73C7B81A703F59359F /* RecordingIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31014368DA9323AC419009B3 /* RecordingIntents.swift */; };
 		210260279E47B5773D39DC37 /* AlaudWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = C174CECAE5F98E7F2224C73E /* AlaudWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		22E7498BF767C0826A368998 /* MeetingRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3CE4048EFE8D68E00EF6ED /* MeetingRecorder.swift */; };
+		26A5B6E3B87BF21438C99BF5 /* LibraryComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79929AC2701FE7ADB6DF173 /* LibraryComponents.swift */; };
+		295749C302F006313AB89638 /* RecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DAADC5E3EC6F39D69CD150 /* RecordingView.swift */; };
+		29A270FAADA3D7B198F24196 /* CloudStorageProbe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47798EC0A73D32C96EACCD16 /* CloudStorageProbe.swift */; };
 		2A069C1D247DFF0643BD6A9D /* WatchTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B0E8433F7B0B901CDFF376 /* WatchTransfer.swift */; };
+		2A3440E9924ED56DE2D0331C /* ICloudDriveTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727DD1CFA5D2317394391788 /* ICloudDriveTransport.swift */; };
 		2E4FAA79981E0CECCC0F1D6A /* SegmentWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E20AE15DD072B24D754635 /* SegmentWriter.swift */; };
 		362CB7A235CB5581DCF2467B /* SegmentWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E20AE15DD072B24D754635 /* SegmentWriter.swift */; };
+		381E72E5D43E89579C07FCAB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E3AEC27F449D5B9FC92330 /* SettingsView.swift */; };
+		3F77A0FBA5436CBD750B6EA1 /* CloudLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B735C5E4BE29E21FE0310927 /* CloudLibrary.swift */; };
+		42F5D862F5B8610FA39FEA2B /* UnavailableCloudTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11931928304404DCA7056D9 /* UnavailableCloudTransport.swift */; };
 		4A74AD64251D37F330D5F951 /* WatchTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B0E8433F7B0B901CDFF376 /* WatchTransfer.swift */; };
+		5114B5782FFB4DCBF924E076 /* CloudStorageProbe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47798EC0A73D32C96EACCD16 /* CloudStorageProbe.swift */; };
 		65F745B855A80C0C303736FC /* AlaudCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1CE56B16E35B69154F20CACE /* AlaudCore */; };
+		675A1CDF67E1AB099EE0E3AF /* MeetingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A2106F365BE0E8C2700EDD /* MeetingDetailView.swift */; };
 		69470A4E4480C305C28EAF76 /* DemoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EF608CC1D0023E1723C8FE /* DemoData.swift */; };
 		6A29613BC40E37FFB928CEA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C9C87239E09A2EAC3F37942 /* Assets.xcassets */; };
 		7510AF41816CF71FC9F4632F /* PlaybackInteractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F32AAA7D968EE8BA02C6E /* PlaybackInteractionTests.swift */; };
+		7E552040924C1C8B9888210D /* ICloudDriveTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727DD1CFA5D2317394391788 /* ICloudDriveTransport.swift */; };
 		82305489C0809D6FB1099B75 /* SegmentWriterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6958EE263D1A096ACCFB41D1 /* SegmentWriterTests.swift */; };
+		839B04E689C51C2386657F45 /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C186CA134ABC8ACE512EE37 /* Design.swift */; };
+		86CC924721D0FB0FC4283004 /* AlaudMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DFA3E2D6CAFB90D74F51C5 /* AlaudMacApp.swift */; };
+		879DBDA5E94AC3739859CB23 /* UnavailableCloudTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11931928304404DCA7056D9 /* UnavailableCloudTransport.swift */; };
 		8862270E3E970FBE63F59B0F /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3E620751404C5DBF8549E6 /* AppModel.swift */; };
+		91F0D6BF3613BDC5A1F2CF0F /* CloudStorageProbe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47798EC0A73D32C96EACCD16 /* CloudStorageProbe.swift */; };
 		93FB6FB10039581B8985B4BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61BC94A3ADD7B44E31821248 /* Assets.xcassets */; };
+		9E721030A2F9770811876FA2 /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C186CA134ABC8ACE512EE37 /* Design.swift */; };
 		A227346C090C9DCD6E2012A9 /* AlaudCore in Frameworks */ = {isa = PBXBuildFile; productRef = D0378352A278CFAC1DAC8160 /* AlaudCore */; };
+		A5ED6FBA535E54F51B3FA944 /* AudioShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CE2A577EB93E03CC5EFC92 /* AudioShareSheet.swift */; };
 		AAA632D8828DC2FEE318EE76 /* TranscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E361217BC0E83A01069CAE9 /* TranscriptionService.swift */; };
 		AC9ED3F528E41812F523E45D /* AlaudApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEC741CF0D8D81D5A684872 /* AlaudApp.swift */; };
+		ADAD0DA300595EBE73CB404C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33375A363712C0BAC1D62F8A /* Assets.xcassets */; };
 		AEEF6B31297342D2113D78BA /* MeetingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A2106F365BE0E8C2700EDD /* MeetingDetailView.swift */; };
 		BD7CE1130892BD0733A35E9F /* AlaudCore in Frameworks */ = {isa = PBXBuildFile; productRef = 98D0774027EC58F1138A5D9C /* AlaudCore */; };
+		C2A18F96F2D86C73C1549E2C /* MacWorkspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF49F8C57DC274620C19845 /* MacWorkspace.swift */; };
 		C56D851F83E53D80AB50087B /* AlaudWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DEF63281DEA5603204DCA07 /* AlaudWatchApp.swift */; };
+		CE2157E5E64048AF22CA7994 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3E620751404C5DBF8549E6 /* AppModel.swift */; };
 		D08030FDAAD7F8C382A2ADC2 /* RecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DAADC5E3EC6F39D69CD150 /* RecordingView.swift */; };
+		D165FFE2F223CCD4F36E487D /* CloudLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B735C5E4BE29E21FE0310927 /* CloudLibrary.swift */; };
+		D47C76F04B6FCA5963A0DD51 /* LibraryComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79929AC2701FE7ADB6DF173 /* LibraryComponents.swift */; };
+		D66256304EC8FA0BA1B31C6D /* WatchTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5E2917F876CA3637270956 /* WatchTransfer.swift */; };
 		DB6F7DB49501590611366BD3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E3AEC27F449D5B9FC92330 /* SettingsView.swift */; };
 		DE565413CD65EDB9B291C119 /* MeetingRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3CE4048EFE8D68E00EF6ED /* MeetingRecorder.swift */; };
 		E4291A998E3FA76041F98246 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3E620751404C5DBF8549E6 /* AppModel.swift */; };
+		E6250195B1E26E4F2CCC65D2 /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C186CA134ABC8ACE512EE37 /* Design.swift */; };
+		E88F1A531E2CE751C7936764 /* TranscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E361217BC0E83A01069CAE9 /* TranscriptionService.swift */; };
+		EF515300B46EAB0DC95AEE56 /* MeetingRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3CE4048EFE8D68E00EF6ED /* MeetingRecorder.swift */; };
+		EF6CBF75FBA0A9A4776BABB6 /* UnavailableCloudTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11931928304404DCA7056D9 /* UnavailableCloudTransport.swift */; };
 		F66CA5FBE0F5911DCED591B4 /* RecordingIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31014368DA9323AC419009B3 /* RecordingIntents.swift */; };
+		FA310B2BA7D6E45B0CE83060 /* AudioShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CE2A577EB93E03CC5EFC92 /* AudioShareSheet.swift */; };
+		FD07C517D4EE5D00CD304585 /* CloudLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B735C5E4BE29E21FE0310927 /* CloudLibrary.swift */; };
 		FE257306B652907284C6D0BD /* InboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DC278D3378693D3C9A39E2 /* InboxView.swift */; };
+		FF28B898FCD65575676ECBB5 /* ICloudDriveTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727DD1CFA5D2317394391788 /* ICloudDriveTransport.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,8 +108,13 @@
 /* Begin PBXFileReference section */
 		073F32AAA7D968EE8BA02C6E /* PlaybackInteractionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackInteractionTests.swift; sourceTree = "<group>"; };
 		17A2106F365BE0E8C2700EDD /* MeetingDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingDetailView.swift; sourceTree = "<group>"; };
+		17CE2A577EB93E03CC5EFC92 /* AudioShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioShareSheet.swift; sourceTree = "<group>"; };
+		2AF49F8C57DC274620C19845 /* MacWorkspace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacWorkspace.swift; sourceTree = "<group>"; };
 		31014368DA9323AC419009B3 /* RecordingIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingIntents.swift; sourceTree = "<group>"; };
+		33375A363712C0BAC1D62F8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3C9C87239E09A2EAC3F37942 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		47798EC0A73D32C96EACCD16 /* CloudStorageProbe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorageProbe.swift; sourceTree = "<group>"; };
+		4C186CA134ABC8ACE512EE37 /* Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
 		50E3AEC27F449D5B9FC92330 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		56EF608CC1D0023E1723C8FE /* DemoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoData.swift; sourceTree = "<group>"; };
 		5DEF63281DEA5603204DCA07 /* AlaudWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlaudWatchApp.swift; sourceTree = "<group>"; };
@@ -85,14 +122,21 @@
 		61BC94A3ADD7B44E31821248 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6958EE263D1A096ACCFB41D1 /* SegmentWriterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentWriterTests.swift; sourceTree = "<group>"; };
 		6C3CE4048EFE8D68E00EF6ED /* MeetingRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingRecorder.swift; sourceTree = "<group>"; };
+		6D5E2917F876CA3637270956 /* WatchTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchTransfer.swift; sourceTree = "<group>"; };
+		727DD1CFA5D2317394391788 /* ICloudDriveTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICloudDriveTransport.swift; sourceTree = "<group>"; };
 		86E20AE15DD072B24D754635 /* SegmentWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentWriter.swift; sourceTree = "<group>"; };
 		969174989F122F9719BFCC38 /* AlaudTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = AlaudTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C3E620751404C5DBF8549E6 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		9CEC741CF0D8D81D5A684872 /* AlaudApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlaudApp.swift; sourceTree = "<group>"; };
+		A4DFA3E2D6CAFB90D74F51C5 /* AlaudMacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlaudMacApp.swift; sourceTree = "<group>"; };
 		A6860523AF21ACBD91AB5CDD /* Alaud.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Alaud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4DC278D3378693D3C9A39E2 /* InboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxView.swift; sourceTree = "<group>"; };
+		B735C5E4BE29E21FE0310927 /* CloudLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudLibrary.swift; sourceTree = "<group>"; };
 		C174CECAE5F98E7F2224C73E /* AlaudWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlaudWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5DAADC5E3EC6F39D69CD150 /* RecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingView.swift; sourceTree = "<group>"; };
+		D11931928304404DCA7056D9 /* UnavailableCloudTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnavailableCloudTransport.swift; sourceTree = "<group>"; };
+		D79929AC2701FE7ADB6DF173 /* LibraryComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryComponents.swift; sourceTree = "<group>"; };
+		E2FE4E1183B0429BF2AE999D /* AlaudMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlaudMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E595B914B1F9008465F437B8 /* 产品｜Apple Watch - Plaud */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "产品｜Apple Watch - Plaud"; path = .; sourceTree = SOURCE_ROOT; };
 		EF1A25B83501D0DDF8B165E0 /* AlaudUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = AlaudUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0B0E8433F7B0B901CDFF376 /* WatchTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchTransfer.swift; sourceTree = "<group>"; };
@@ -104,6 +148,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A227346C090C9DCD6E2012A9 /* AlaudCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C36F283DD1894DF803E6BFB5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0EAC629D0393298871B081E5 /* AlaudCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +197,7 @@
 		4D471F4EA6E54122EAF06EC0 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				7131C54D5D1E2ABB48013F5B /* Mac */,
 				5BFA9F58BA8A304EC887A3FE /* Phone */,
 				D400E389163B01C7F54E8EFC /* Shared */,
 				DE2148590A3AC07893EBB516 /* Watch */,
@@ -157,8 +210,10 @@
 			children = (
 				9CEC741CF0D8D81D5A684872 /* AlaudApp.swift */,
 				3C9C87239E09A2EAC3F37942 /* Assets.xcassets */,
+				17CE2A577EB93E03CC5EFC92 /* AudioShareSheet.swift */,
 				56EF608CC1D0023E1723C8FE /* DemoData.swift */,
 				B4DC278D3378693D3C9A39E2 /* InboxView.swift */,
+				D79929AC2701FE7ADB6DF173 /* LibraryComponents.swift */,
 				17A2106F365BE0E8C2700EDD /* MeetingDetailView.swift */,
 				C5DAADC5E3EC6F39D69CD150 /* RecordingView.swift */,
 				50E3AEC27F449D5B9FC92330 /* SettingsView.swift */,
@@ -175,6 +230,17 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		7131C54D5D1E2ABB48013F5B /* Mac */ = {
+			isa = PBXGroup;
+			children = (
+				A4DFA3E2D6CAFB90D74F51C5 /* AlaudMacApp.swift */,
+				33375A363712C0BAC1D62F8A /* Assets.xcassets */,
+				2AF49F8C57DC274620C19845 /* MacWorkspace.swift */,
+				6D5E2917F876CA3637270956 /* WatchTransfer.swift */,
+			);
+			path = Mac;
+			sourceTree = "<group>";
+		};
 		CA0675E0F577C131699E80B8 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,9 +254,14 @@
 			isa = PBXGroup;
 			children = (
 				9C3E620751404C5DBF8549E6 /* AppModel.swift */,
+				B735C5E4BE29E21FE0310927 /* CloudLibrary.swift */,
+				47798EC0A73D32C96EACCD16 /* CloudStorageProbe.swift */,
+				4C186CA134ABC8ACE512EE37 /* Design.swift */,
+				727DD1CFA5D2317394391788 /* ICloudDriveTransport.swift */,
 				6C3CE4048EFE8D68E00EF6ED /* MeetingRecorder.swift */,
 				31014368DA9323AC419009B3 /* RecordingIntents.swift */,
 				86E20AE15DD072B24D754635 /* SegmentWriter.swift */,
+				D11931928304404DCA7056D9 /* UnavailableCloudTransport.swift */,
 				F0B0E8433F7B0B901CDFF376 /* WatchTransfer.swift */,
 			);
 			path = Shared;
@@ -219,6 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				A6860523AF21ACBD91AB5CDD /* Alaud.app */,
+				E2FE4E1183B0429BF2AE999D /* AlaudMac.app */,
 				969174989F122F9719BFCC38 /* AlaudTests.xctest */,
 				EF1A25B83501D0DDF8B165E0 /* AlaudUITests.xctest */,
 				C174CECAE5F98E7F2224C73E /* AlaudWatch.app */,
@@ -291,6 +363,26 @@
 			productReference = C174CECAE5F98E7F2224C73E /* AlaudWatch.app */;
 			productType = "com.apple.product-type.application";
 		};
+		9959863E746CE28DB79E49B8 /* AlaudMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0E3120F091B4E76D112D3EF7 /* Build configuration list for PBXNativeTarget "AlaudMac" */;
+			buildPhases = (
+				B4FE1D00ACA0774868922D8A /* Sources */,
+				94B0E49A2C3B72D5174010B9 /* Resources */,
+				C36F283DD1894DF803E6BFB5 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AlaudMac;
+			packageProductDependencies = (
+				6991825B25864DF636A9D626 /* AlaudCore */,
+			);
+			productName = AlaudMac;
+			productReference = E2FE4E1183B0429BF2AE999D /* AlaudMac.app */;
+			productType = "com.apple.product-type.application";
+		};
 		EBFAE8DD68EBF4598FA93EC7 /* AlaudUITests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 52185CE8C39B66748051707E /* Build configuration list for PBXNativeTarget "AlaudUITests" */;
@@ -330,6 +422,10 @@
 						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 					};
+					9959863E746CE28DB79E49B8 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
 					EBFAE8DD68EBF4598FA93EC7 = {
 						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
@@ -355,6 +451,7 @@
 			projectRoot = "";
 			targets = (
 				1070E4E376D8A9E2E70159A0 /* Alaud */,
+				9959863E746CE28DB79E49B8 /* AlaudMac */,
 				957C046FBCB9F34A8B7E5302 /* AlaudWatch */,
 				88AAFBD3122DACB239D355F5 /* AlaudTests */,
 				EBFAE8DD68EBF4598FA93EC7 /* AlaudUITests */,
@@ -363,6 +460,14 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		94B0E49A2C3B72D5174010B9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADAD0DA300595EBE73CB404C /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CF368BA81892F9071F5B2946 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -388,8 +493,14 @@
 			files = (
 				AC9ED3F528E41812F523E45D /* AlaudApp.swift in Sources */,
 				E4291A998E3FA76041F98246 /* AppModel.swift in Sources */,
+				FA310B2BA7D6E45B0CE83060 /* AudioShareSheet.swift in Sources */,
+				D165FFE2F223CCD4F36E487D /* CloudLibrary.swift in Sources */,
+				91F0D6BF3613BDC5A1F2CF0F /* CloudStorageProbe.swift in Sources */,
 				69470A4E4480C305C28EAF76 /* DemoData.swift in Sources */,
+				9E721030A2F9770811876FA2 /* Design.swift in Sources */,
+				7E552040924C1C8B9888210D /* ICloudDriveTransport.swift in Sources */,
 				FE257306B652907284C6D0BD /* InboxView.swift in Sources */,
+				D47C76F04B6FCA5963A0DD51 /* LibraryComponents.swift in Sources */,
 				AEEF6B31297342D2113D78BA /* MeetingDetailView.swift in Sources */,
 				22E7498BF767C0826A368998 /* MeetingRecorder.swift in Sources */,
 				F66CA5FBE0F5911DCED591B4 /* RecordingIntents.swift in Sources */,
@@ -397,6 +508,7 @@
 				2E4FAA79981E0CECCC0F1D6A /* SegmentWriter.swift in Sources */,
 				DB6F7DB49501590611366BD3 /* SettingsView.swift in Sources */,
 				AAA632D8828DC2FEE318EE76 /* TranscriptionService.swift in Sources */,
+				EF6CBF75FBA0A9A4776BABB6 /* UnavailableCloudTransport.swift in Sources */,
 				4A74AD64251D37F330D5F951 /* WatchTransfer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -415,10 +527,40 @@
 			files = (
 				C56D851F83E53D80AB50087B /* AlaudWatchApp.swift in Sources */,
 				8862270E3E970FBE63F59B0F /* AppModel.swift in Sources */,
+				3F77A0FBA5436CBD750B6EA1 /* CloudLibrary.swift in Sources */,
+				29A270FAADA3D7B198F24196 /* CloudStorageProbe.swift in Sources */,
+				839B04E689C51C2386657F45 /* Design.swift in Sources */,
+				FF28B898FCD65575676ECBB5 /* ICloudDriveTransport.swift in Sources */,
 				DE565413CD65EDB9B291C119 /* MeetingRecorder.swift in Sources */,
 				1E8A2E73C7B81A703F59359F /* RecordingIntents.swift in Sources */,
 				362CB7A235CB5581DCF2467B /* SegmentWriter.swift in Sources */,
+				879DBDA5E94AC3739859CB23 /* UnavailableCloudTransport.swift in Sources */,
 				2A069C1D247DFF0643BD6A9D /* WatchTransfer.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B4FE1D00ACA0774868922D8A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86CC924721D0FB0FC4283004 /* AlaudMacApp.swift in Sources */,
+				CE2157E5E64048AF22CA7994 /* AppModel.swift in Sources */,
+				A5ED6FBA535E54F51B3FA944 /* AudioShareSheet.swift in Sources */,
+				FD07C517D4EE5D00CD304585 /* CloudLibrary.swift in Sources */,
+				5114B5782FFB4DCBF924E076 /* CloudStorageProbe.swift in Sources */,
+				13C7D9DC4E726C139ACC08F0 /* DemoData.swift in Sources */,
+				E6250195B1E26E4F2CCC65D2 /* Design.swift in Sources */,
+				2A3440E9924ED56DE2D0331C /* ICloudDriveTransport.swift in Sources */,
+				26A5B6E3B87BF21438C99BF5 /* LibraryComponents.swift in Sources */,
+				C2A18F96F2D86C73C1549E2C /* MacWorkspace.swift in Sources */,
+				675A1CDF67E1AB099EE0E3AF /* MeetingDetailView.swift in Sources */,
+				EF515300B46EAB0DC95AEE56 /* MeetingRecorder.swift in Sources */,
+				295749C302F006313AB89638 /* RecordingView.swift in Sources */,
+				0EB6EFEDCE826ABF9FBC00EE /* SegmentWriter.swift in Sources */,
+				381E72E5D43E89579C07FCAB /* SettingsView.swift in Sources */,
+				E88F1A531E2CE751C7936764 /* TranscriptionService.swift in Sources */,
+				42F5D862F5B8610FA39FEA2B /* UnavailableCloudTransport.swift in Sources */,
+				D66256304EC8FA0BA1B31C6D /* WatchTransfer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,6 +597,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Config/Phone.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Config/Phone-Info.plist";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
@@ -533,7 +676,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_LANGUAGE = "zh-Hans";
 				DEVELOPMENT_TEAM = "";
@@ -556,7 +699,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
-				MARKETING_VERSION = 0.1.1;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 0.2.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -566,6 +710,25 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Debug;
+		};
+		68F4F3F6B050F08F55FBAC9F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Config/Mac.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "Config/Mac-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.gaoyiming.alaud.mac;
+				PRODUCT_NAME = Alaud;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -590,6 +753,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Config/Phone.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Config/Phone-Info.plist";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
@@ -637,6 +801,25 @@
 			};
 			name = Release;
 		};
+		E0E6763BE6AF605E884CAFD8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Config/Mac.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "Config/Mac-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.gaoyiming.alaud.mac;
+				PRODUCT_NAME = Alaud;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		EBFF2C99E228C91A07B9B929 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -673,7 +856,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_LANGUAGE = "zh-Hans";
 				DEVELOPMENT_TEAM = "";
@@ -690,7 +873,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
-				MARKETING_VERSION = 0.1.1;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 0.2.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -717,6 +901,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0E3120F091B4E76D112D3EF7 /* Build configuration list for PBXNativeTarget "AlaudMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68F4F3F6B050F08F55FBAC9F /* Debug */,
+				E0E6763BE6AF605E884CAFD8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		49EAC6037BD1E54C17E92B03 /* Build configuration list for PBXProject "Alaud" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -773,6 +966,10 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		1CE56B16E35B69154F20CACE /* AlaudCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AlaudCore;
+		};
+		6991825B25864DF636A9D626 /* AlaudCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AlaudCore;
 		};

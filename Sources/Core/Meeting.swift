@@ -1,8 +1,13 @@
 import Foundation
 
 public enum RecordingSource: String, Codable, Sendable {
-    case phone, watch
-    public var title: String { self == .phone ? "iPhone" : "Apple Watch" }
+    case phone, watch, mac
+    public var title: String {
+        switch self { case .phone: return "iPhone"; case .watch: return "Apple Watch"; case .mac: return "Mac" }
+    }
+    public var symbol: String {
+        switch self { case .phone: return "iphone"; case .watch: return "applewatch"; case .mac: return "desktopcomputer" }
+    }
 }
 
 public enum CaptureState: String, Codable, Sendable {

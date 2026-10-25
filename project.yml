@@ -4,6 +4,7 @@ options:
   deploymentTarget:
     iOS: '26.0'
     watchOS: '26.0'
+    macOS: '26.0'
   createIntermediateGroups: true
 packages:
   AlaudCore:
@@ -11,8 +12,8 @@ packages:
 settings:
   base:
     SWIFT_VERSION: '5.0'
-    MARKETING_VERSION: '0.1.1'
-    CURRENT_PROJECT_VERSION: '2'
+    MARKETING_VERSION: '0.2.0'
+    CURRENT_PROJECT_VERSION: '3'
     CODE_SIGN_STYLE: Automatic
     DEVELOPMENT_TEAM: ''
     ENABLE_USER_SCRIPT_SANDBOXING: YES
@@ -33,15 +34,22 @@ targets:
         CFBundleDisplayName: Alaud
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSUbiquitousContainers:
+          iCloud.com.gaoyiming.alaud:
+            NSUbiquitousContainerIsDocumentScopePublic: true
+            NSUbiquitousContainerName: Alaud
+            NSUbiquitousContainerSupportedFolderLevels: Any
         LSApplicationCategoryType: public.app-category.productivity
         NSMicrophoneUsageDescription: 用于录制你主动开始的会议，并保存原音供会后核对。
         NSSpeechRecognitionUsageDescription: 将已保存的会议录音转成可检索的文字。
-        UIBackgroundModes: [audio]
+        UIBackgroundModes: [audio, processing]
+        BGTaskSchedulerPermittedIdentifiers: [com.gaoyiming.alaud.cloudsync]
         UILaunchScreen: {}
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait, UIInterfaceOrientationPortraitUpsideDown, UIInterfaceOrientationLandscapeLeft, UIInterfaceOrientationLandscapeRight]
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.gaoyiming.alaud
+        CODE_SIGN_ENTITLEMENTS: Config/Phone.entitlements
         TARGETED_DEVICE_FAMILY: '1,2'
         INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: NO
     dependencies:
@@ -50,6 +58,39 @@ targets:
         embed: true
     scheme:
       testTargets: [AlaudTests, AlaudUITests]
+  AlaudMac:
+    type: application
+    platform: macOS
+    sources:
+      - path: Sources/Shared
+        excludes: [WatchTransfer.swift, RecordingIntents.swift]
+      - path: Sources/Phone
+        excludes: [AlaudApp.swift, InboxView.swift, Assets.xcassets]
+      - Sources/Mac
+    info:
+      path: Config/Mac-Info.plist
+      properties:
+        CFBundleDisplayName: Alaud
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSUbiquitousContainers:
+          iCloud.com.gaoyiming.alaud:
+            NSUbiquitousContainerIsDocumentScopePublic: true
+            NSUbiquitousContainerName: Alaud
+            NSUbiquitousContainerSupportedFolderLevels: Any
+        LSApplicationCategoryType: public.app-category.productivity
+        NSMicrophoneUsageDescription: 用于录制你主动开始的会议，保存到自己的 iCloud 录音库。
+        NSSpeechRecognitionUsageDescription: 将已保存的会议录音在本机转成可检索的文字。
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.gaoyiming.alaud.mac
+        PRODUCT_NAME: Alaud
+        CODE_SIGN_ENTITLEMENTS: Config/Mac.entitlements
+        CODE_SIGN_IDENTITY: Apple Development
+        ENABLE_HARDENED_RUNTIME: YES
+        COMBINE_HIDPI_IMAGES: YES
+    dependencies:
+      - package: AlaudCore
   AlaudWatch:
     type: application
     platform: watchOS

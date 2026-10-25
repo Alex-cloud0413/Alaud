@@ -1,10 +1,10 @@
 {
-  "verifiedAt": "2026-10-25T19:49:55+08:00",
+  "verifiedAt": "2026-10-25T22:39:58+08:00",
   "phone": {
     "device": "iPhone 17",
     "bundleIdentifier": "com.gaoyiming.alaud",
-    "version": "0.1.1",
-    "build": "2",
+    "version": "0.2.0",
+    "build": "3",
     "installed": true,
     "installedAppReadback": true,
     "launched": true,
@@ -15,8 +15,8 @@
   "watch": {
     "device": "Apple Watch Series 11",
     "bundleIdentifier": "com.gaoyiming.alaud.watchkitapp",
-    "version": "0.1.1",
-    "build": "2",
+    "version": "0.2.0",
+    "build": "3",
     "developerMode": "enabled",
     "installed": true,
     "installedAppReadback": true,
@@ -32,9 +32,13 @@
     "watchTransfer": "user_report_passed_0.1.0",
     "playbackShareRegression": "simulator_ui_test_passed_0.1.1",
     "watchAutomaticCleanup": "physical_device_file_metadata_verified_0.1.1",
-    "longMeetingBatteryInterruptions": "not_tested"
+    "longMeetingBatteryInterruptions": "not_tested",
+    "icloudCrossDevice": "physical_iphone_read_mac_synthetic_fixture_hash_passed",
+    "icloudCacheEviction": "both_synthetic_probes_zero_audio_cache",
+    "existingPhoneMigration": "physical_device_file_metadata_before_after_verified",
+    "macMicrophone": "not_tested"
   },
-  "localPackage": "artifacts/Alaud-0.1.1-development.ipa",
+  "localPackage": "artifacts/Alaud-0.2.0-development.ipa",
   "storageCleanupVerification": {
     "verifiedAt": "2026-10-25T19:48:32+08:00",
     "method": "devicectl_file_metadata_before_after",
@@ -56,5 +60,39 @@
       "afterAudioBytes": 0,
       "afterMeetingManifestCount": 0
     }
+  },
+  "mac": {
+    "bundleIdentifier": "com.gaoyiming.alaud.mac",
+    "version": "0.2.0",
+    "build": "3",
+    "installedPath": "/Applications/Alaud.app",
+    "installed": true,
+    "launched": true,
+    "nativeUIReadback": true,
+    "recordingStartedByAgent": false,
+    "cloudLibraryCount": 1,
+    "audioCacheBytesReadback": 0,
+    "method": "native_app_settings_and_library_ui"
+  },
+  "localMacPackage": "artifacts/Alaud-0.2.0-Mac-development.zip",
+  "icloudMigrationVerification": {
+    "verifiedAt": "2026-10-25T22:39:58+08:00",
+    "method": "devicectl_file_metadata_before_after",
+    "realAudioOrTranscriptCopiedIntoDevelopmentArtifacts": false,
+    "manualDeletion": false,
+    "phone": {
+      "beforeAudioFiles": 1,
+      "beforeAudioBytes": 1283858,
+      "afterAudioFiles": 0,
+      "afterAudioBytes": 0,
+      "afterMeetingManifestCount": 1,
+      "afterCloudReceiptCount": 1
+    },
+    "watch": {
+      "afterAudioFiles": 0,
+      "afterMeetingManifestCount": 0
+    },
+    "macLibraryCount": 1,
+    "macAudioCacheBytes": 0
   }
 }
