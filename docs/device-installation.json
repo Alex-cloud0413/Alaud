@@ -1,0 +1,25 @@
+{
+  "verifiedAt": "2026-10-25T18:48:04+08:00",
+  "phone": {
+    "device": "iPhone 17",
+    "bundleIdentifier": "com.gaoyiming.alaud",
+    "version": "0.1.0",
+    "build": "1",
+    "installed": true,
+    "installedAppReadback": true,
+    "launched": true,
+    "runningProcessReadback": true,
+    "recordingStarted": false
+  },
+  "watch": {
+    "device": "Apple Watch Series 11",
+    "installed": "unverified",
+    "reason": "Direct installation and app query timed out establishing the development tunnel; Mac device discovery currently reports Developer Mode disabled. Waiting for the user to enable and confirm on the Watch."
+  },
+  "acceptance": {
+    "microphone": false,
+    "recording": false,
+    "transcription": false,
+    "watchTransfer": false
+  }
+}
