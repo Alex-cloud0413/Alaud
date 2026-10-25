@@ -38,7 +38,7 @@
     "开发签名与安装包",
     "构建缓存"
   ],
-  "deviceInstallation": "phone_installed_and_launched_watch_pending",
+  "deviceInstallation": "phone_and_watch_installed_and_launched",
   "portfolioSync": "failed_due_to_preexisting_missing_execution_plan",
   "githubFreshClone": {
     "commit": "04b77a38878af030e74244b726b2826a51ded3a2",

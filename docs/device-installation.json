@@ -1,5 +1,5 @@
 {
-  "verifiedAt": "2026-10-25T18:48:04+08:00",
+  "verifiedAt": "2026-10-25T19:05:21+08:00",
   "phone": {
     "device": "iPhone 17",
     "bundleIdentifier": "com.gaoyiming.alaud",
@@ -9,17 +9,26 @@
     "installedAppReadback": true,
     "launched": true,
     "runningProcessReadback": true,
-    "recordingStarted": false
+    "recordingStartedByAgent": false
   },
   "watch": {
     "device": "Apple Watch Series 11",
-    "installed": "unverified",
-    "reason": "Direct installation and app query timed out establishing the development tunnel; Mac device discovery currently reports Developer Mode disabled. Waiting for the user to enable and confirm on the Watch."
+    "bundleIdentifier": "com.gaoyiming.alaud.watchkitapp",
+    "version": "0.1.0",
+    "build": "1",
+    "developerMode": "enabled",
+    "installed": true,
+    "installedAppReadback": true,
+    "launched": true,
+    "runningProcessReadback": true,
+    "recordingStartedByAgent": false,
+    "deviceIncludedInSigningProfile": true
   },
   "acceptance": {
-    "microphone": false,
-    "recording": false,
-    "transcription": false,
-    "watchTransfer": false
-  }
+    "microphone": "not_tested",
+    "recording": "not_tested",
+    "transcription": "not_tested",
+    "watchTransfer": "not_tested"
+  },
+  "localPackage": "artifacts/Alaud-0.1.0-development-watch-ready.ipa"
 }
