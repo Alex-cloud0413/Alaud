@@ -37,9 +37,11 @@
     ]
   },
   "lastVerified": {
-    "githubCommit": "",
+    "githubCommit": "04b77a38878af030e74244b726b2826a51ded3a2",
     "verifiedAt": "2026-10-25T16:05:45+08:00",
     "driveFileCount": 5,
-    "driveByteCount": 1650937
+    "driveByteCount": 1650937,
+    "freshCloneFileCount": 56,
+    "method": "fresh_clone_and_sha256_all_tracked_files"
   }
 }
